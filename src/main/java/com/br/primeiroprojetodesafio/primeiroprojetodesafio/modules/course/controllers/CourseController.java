@@ -15,12 +15,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 
 @RestController
-@RequestMapping("/course")
+@RequestMapping("/primeiroprojetodesafio")
 public class CourseController {
     @Autowired
     private CreateCourseUseCase createCourseUseCase;
 
-    @PostMapping("/")
+    @PostMapping("/cursos")
     public CourseEntity create(@RequestBody CreateCourseDTO createCourseDTO, HttpServletRequest request) {
         var courseEntity = CourseEntity.builder()
         .name(createCourseDTO.getName())
