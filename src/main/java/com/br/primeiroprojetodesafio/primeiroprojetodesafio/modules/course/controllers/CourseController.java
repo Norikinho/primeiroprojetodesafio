@@ -1,17 +1,18 @@
 package com.br.primeiroprojetodesafio.primeiroprojetodesafio.modules.course.controllers;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.br.primeiroprojetodesafio.primeiroprojetodesafio.CourseEntity;
 import com.br.primeiroprojetodesafio.primeiroprojetodesafio.CourseRepository;
 import com.br.primeiroprojetodesafio.primeiroprojetodesafio.modules.course.dto.CreateCourseDTO;
 import com.br.primeiroprojetodesafio.primeiroprojetodesafio.modules.course.useCases.CreateCourseUseCase;
+import com.br.primeiroprojetodesafio.primeiroprojetodesafio.modules.course.useCases.ProfileCourseUseCase;
 
 import jakarta.servlet.http.HttpServletRequest;
 
@@ -29,8 +30,11 @@ public class CourseController {
     @Autowired
     private CourseRepository courseRepository;
 
+    @Autowired
+    private ProfileCourseUseCase profileCourseUseCase;
+
     @PostMapping("/cursos")
-    public CourseEntity create(@RequestBody CreateCourseDTO createCourseDTO, HttpServletRequest request) {
+    public CourseEntity create(@RequestBody CreateCourseDTO createCourseDTO) {
         var courseEntity = CourseEntity.builder()
         .name(createCourseDTO.getName())
         .category(createCourseDTO.getCategory())
@@ -45,6 +49,31 @@ public class CourseController {
         return courseRepository.findAll();
     }
 
+   /*  @GetMapping("/curso")
+    public ResponseEntity<Object> getOne(HttpServletRequest request) {
+        var idCourse = request.getAttribute("id");
+
+        try {
+            var curso = this.profileCourseUseCase
+            .execute(UUID.fromString(idCourse.toString()));
+            return ResponseEntity.ok().body(curso);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+    */
+    @GetMapping("/curso/{id}")
+    public ResponseEntity<Object> getOne(@PathVariable String id) {
+      // var idCourse = request.getAttribute("id");
+
+        try {
+            var curso = this.profileCourseUseCase
+            .execute(UUID.fromString(id));
+            return ResponseEntity.ok().body(curso);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
     
     
 }
