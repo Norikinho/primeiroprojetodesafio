@@ -5,7 +5,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.br.primeiroprojetodesafio.primeiroprojetodesafio.CourseEntity;
-import com.br.primeiroprojetodesafio.primeiroprojetodesafio.modules.course.dto.CourseDTO;
 import com.br.primeiroprojetodesafio.primeiroprojetodesafio.modules.course.dto.CreateCourseDTO;
 import com.br.primeiroprojetodesafio.primeiroprojetodesafio.modules.course.useCases.CreateCourseUseCase;
 
