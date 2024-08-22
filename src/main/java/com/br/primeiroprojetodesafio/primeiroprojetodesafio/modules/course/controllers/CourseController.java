@@ -14,13 +14,11 @@ import com.br.primeiroprojetodesafio.primeiroprojetodesafio.modules.course.dto.C
 import com.br.primeiroprojetodesafio.primeiroprojetodesafio.modules.course.useCases.CreateCourseUseCase;
 import com.br.primeiroprojetodesafio.primeiroprojetodesafio.modules.course.useCases.ProfileCourseUseCase;
 
-import jakarta.servlet.http.HttpServletRequest;
-
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-
 
 @RestController
 @RequestMapping("/primeiroprojetodesafio")
@@ -36,11 +34,11 @@ public class CourseController {
     @PostMapping("/cursos")
     public CourseEntity create(@RequestBody CreateCourseDTO createCourseDTO) {
         var courseEntity = CourseEntity.builder()
-        .name(createCourseDTO.getName())
-        .category(createCourseDTO.getCategory())
-        .active(createCourseDTO.getActive())
-        .build();
-        
+                .name(createCourseDTO.getName())
+                .category(createCourseDTO.getCategory())
+                .active(createCourseDTO.getActive())
+                .build();
+
         return createCourseUseCase.execute(courseEntity);
     }
 
@@ -49,31 +47,24 @@ public class CourseController {
         return courseRepository.findAll();
     }
 
-   /*  @GetMapping("/curso")
-    public ResponseEntity<Object> getOne(HttpServletRequest request) {
-        var idCourse = request.getAttribute("id");
-
-        try {
-            var curso = this.profileCourseUseCase
-            .execute(UUID.fromString(idCourse.toString()));
-            return ResponseEntity.ok().body(curso);
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
-    }
-    */
     @GetMapping("/curso/{id}")
     public ResponseEntity<Object> getOne(@PathVariable String id) {
-      // var idCourse = request.getAttribute("id");
+        // var idCourse = request.getAttribute("id");
 
         try {
             var curso = this.profileCourseUseCase
-            .execute(UUID.fromString(id));
+                    .execute(UUID.fromString(id));
             return ResponseEntity.ok().body(curso);
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
+
     }
-    
-    
+
+    @DeleteMapping("/curso/{id}")
+    public void deleteCourse(@PathVariable String id) {
+        this.courseRepository.deleteById(UUID.fromString(id));
+
+    }
+
 }
