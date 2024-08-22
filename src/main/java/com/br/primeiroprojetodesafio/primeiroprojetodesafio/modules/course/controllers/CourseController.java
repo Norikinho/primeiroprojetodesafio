@@ -12,6 +12,8 @@ import com.br.primeiroprojetodesafio.primeiroprojetodesafio.CourseEntity;
 import com.br.primeiroprojetodesafio.primeiroprojetodesafio.CourseRepository;
 import com.br.primeiroprojetodesafio.primeiroprojetodesafio.modules.course.dto.CreateCourseDTO;
 import com.br.primeiroprojetodesafio.primeiroprojetodesafio.modules.course.useCases.CreateCourseUseCase;
+import com.br.primeiroprojetodesafio.primeiroprojetodesafio.modules.course.useCases.DeleteCourseUseCase;
+import com.br.primeiroprojetodesafio.primeiroprojetodesafio.modules.course.useCases.FindAllCourseUseCase;
 import com.br.primeiroprojetodesafio.primeiroprojetodesafio.modules.course.useCases.ProfileCourseUseCase;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -25,8 +27,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 public class CourseController {
     @Autowired
     private CreateCourseUseCase createCourseUseCase;
+
     @Autowired
-    private CourseRepository courseRepository;
+    private DeleteCourseUseCase deleteCourseUseCase;
+
+    @Autowired
+    private FindAllCourseUseCase findAllCourseUseCase;
 
     @Autowired
     private ProfileCourseUseCase profileCourseUseCase;
@@ -44,7 +50,7 @@ public class CourseController {
 
     @GetMapping("/cursos")
     public List<CourseEntity> all() {
-        return courseRepository.findAll();
+        return findAllCourseUseCase.execute();
     }
 
     @GetMapping("/curso/{id}")
@@ -63,8 +69,7 @@ public class CourseController {
 
     @DeleteMapping("/curso/{id}")
     public void deleteCourse(@PathVariable String id) {
-        this.courseRepository.deleteById(UUID.fromString(id));
-
+        deleteCourseUseCase.execute(id);
     }
 
 }
