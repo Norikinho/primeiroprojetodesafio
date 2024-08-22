@@ -1,0 +1,10 @@
+services:
+  postgres:
+    image: 'postgres:latest'
+    container_name: primeiroprojetodesafio
+    environment:
+      - 'POSTGRES_DB=primeiroprojetodesafio'
+      - 'POSTGRES_PASSWORD=admin'
+      - 'POSTGRES_USER=admin'
+    ports:
+      - '5432:5432'
