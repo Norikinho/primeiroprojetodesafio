@@ -26,13 +26,13 @@ public class CourseEntity {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    @Length(min=6,max =30)
+    @Length(min=1,max =30)
     private String name;
 
-    @Length(min=6,max =30)
+    @Length(min=1,max =30)
     private String category;
 
-    @Length(min=6,max =30)
+    @Length(min=1,max =30)
     private String active;
 
     @CreationTimestamp
