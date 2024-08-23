@@ -1,6 +1,5 @@
 package com.br.primeiroprojetodesafio.primeiroprojetodesafio.modules.course.useCases;
 
-import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
