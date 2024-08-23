@@ -14,16 +14,11 @@ public class UpdateStatusUseCase {
     @Autowired
     private CourseRepository courseRepository;
 
-    public CourseEntity execute (CourseEntity courseEntity, String idCurso){
+    public void execute (CourseEntity courseEntity, String idCurso){
       Optional<CourseEntity> course =  this.courseRepository.findById(UUID.fromString(idCurso));
       
-     if (course.isPresent())
-     {
-        course.get().setActive(courseEntity.getActive());
-        
-        
-     };
-     return  this.courseRepository.save(courseEntity);
+       course.get().setActive(courseEntity.getActive());
+      
     }
     
 }
