@@ -24,7 +24,7 @@ import lombok.NoArgsConstructor;
 public class CourseEntity {
     @Id 
     @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID id;
+    private UUID idEntity;
 
     @Length(min=1,max =30)
     private String name;

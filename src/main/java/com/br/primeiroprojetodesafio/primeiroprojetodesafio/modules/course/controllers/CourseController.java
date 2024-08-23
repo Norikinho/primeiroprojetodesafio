@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.br.primeiroprojetodesafio.primeiroprojetodesafio.CourseEntity;
 import com.br.primeiroprojetodesafio.primeiroprojetodesafio.modules.course.dto.CreateCourseDTO;
+import com.br.primeiroprojetodesafio.primeiroprojetodesafio.modules.course.dto.ProfileCourseResponseDTO;
 import com.br.primeiroprojetodesafio.primeiroprojetodesafio.modules.course.useCases.CreateCourseUseCase;
 import com.br.primeiroprojetodesafio.primeiroprojetodesafio.modules.course.useCases.DeleteCourseUseCase;
 import com.br.primeiroprojetodesafio.primeiroprojetodesafio.modules.course.useCases.FindAllCourseUseCase;
@@ -80,8 +81,9 @@ public class CourseController {
     }
 
     @PatchMapping("/curso/{id}/active")
-    public void updateActive(@RequestBody CourseEntity courseEntity, @PathVariable String id) {
-        updateStatusUseCase.execute(courseEntity, id);
+    public ResponseEntity<CourseEntity>  updateActive(@RequestBody CourseEntity courseEntity, @PathVariable String id) {
+           var curso = this.updateStatusUseCase.execute(courseEntity, id);
+            return ResponseEntity.ok().body(curso);
     }
 
 }
