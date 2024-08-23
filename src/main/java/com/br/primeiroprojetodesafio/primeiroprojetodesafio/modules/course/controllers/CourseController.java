@@ -81,9 +81,8 @@ public class CourseController {
     }
 
     @PatchMapping("/curso/{id}/active")
-    public ResponseEntity<CourseEntity>  updateActive(@RequestBody CourseEntity courseEntity, @PathVariable String id) {
-           var curso = this.updateStatusUseCase.execute(courseEntity, id);
-            return ResponseEntity.ok().body(curso);
+    public void updateActive(@RequestBody CourseEntity courseEntity, @PathVariable String id) {
+            this.updateStatusUseCase.execute(courseEntity, id);
     }
 
 }
